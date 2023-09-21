@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+$api = app('Dingo\Api\Routing\Router');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+$api->version('v1', function (Dingo\Api\Routing\Router $api) {
+    $api->post('/auth/login', [AuthController::class, 'login']);
+ 
+});
+
+
+
+/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+ */
